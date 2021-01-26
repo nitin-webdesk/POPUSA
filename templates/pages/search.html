@@ -1,0 +1,91 @@
+---
+product_results:
+    limit: {{theme_settings.searchpage_products_per_page}}
+---
+{{inject 'categoryTree' forms.search.category_options}}
+{{inject 'searchProductsPerPage' theme_settings.searchpage_products_per_page}}
+{{#partial "head"}}
+    {{#if pagination.product_results.previous}}
+        <link rel="prev" href="{{pagination.product_results.previous}}">
+    {{/if}}
+    {{#if pagination.product_results.next}}
+        <link rel="next" href="{{pagination.product_results.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+{{#if result_count '===' 0}}
+<section class="nav {{#if result_count '===' 0}}No_Search_product{{/if}}">
+	<div class="noSearchBG">
+		<div class="noSearchBGTop">
+			<h2>Search Results for "<a href="/">{{forms.search.query}}</a>"</h2>
+			<p>Your search - <strong>{{forms.search.query}}</strong> - did not match any products</p>
+		</div>
+		<div class="noSearchBGBottom">
+			<p>Suggestions:</p>
+			<ul><li>Make sure all words are spelled correctly.</li> <li>Try different keywords.</li> <li>Try more general keywords.</li> </ul>
+		</div>
+	</div>
+</section>
+{{/if}}
+
+<section class="nav">
+    {{#if forms.search.query}}
+        <div id="search-results-heading">
+            {{>components/search/heading}}
+        </div>
+    {{/if}}
+
+    {{#if product_results.products.length}}
+        {{> components/products/filter sort=pagination.product_results.sort}}
+    {{/if}}
+	
+    {{#unless product_results.faceted_search_enabled}}
+        {{>components/search/advanced-search}}
+    {{/unless}}
+</section>
+
+<section class="page">
+    <div class="csb_page_align">
+    {{#if product_results.products}}
+        {{#if product_results.faceted_search_enabled}}
+        <div class="csb_page_left">
+            <aside class="page-sidebar{{#if forms.search.section '!=' 'product'}} u-hiddenVisually{{/if}}" id="faceted-search-container">
+                {{> components/faceted-search/index product_results}}
+            </aside>
+        </div>
+        {{/if}}
+        <div class="csb_page_right">
+        <main class="page-content">
+    {{else}}
+    <div class="csb_page_right">
+        <main class="page-content page-content--centered">
+    {{/if}}
+
+        {{#if content_results}}
+            <div id="search-results-content" {{#if forms.search.section '!=' 'content'}}class="u-hiddenVisually"{{/if}}>
+                {{> components/search/content-sort-box sort=pagination.content_results.sort}}
+                <ul>
+                    {{#each content_results}}
+                        <strong><a href="{{url}}">{{{title}}}</a></strong>({{type}})
+                        <p>{{{content}}}</p>
+                    {{/each}}
+                </ul>
+                {{> components/common/paginator pagination.content_results reload=true}}
+            </div>
+        {{/if}}
+
+        <div id="product-listing-container" {{#if forms.search.section '!=' 'product'}}class="u-hiddenVisually"{{/if}}>
+            {{> components/search/product-listing}}
+        </div>
+
+        {{{region name="search_below_content"}}}
+        </main>
+    </div>
+    </div>
+</section>
+{{/partial}}
+{{> layout/base}}
+ 

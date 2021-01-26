@@ -1,0 +1,39 @@
+{{#if social_media}}
+    <ul class="socialLinks socialLinks--alt">
+        {{#each social_media}}
+            <li class="socialLinks-item">
+                {{#if display_name '===' 'google+'}}
+                    <a class="icon icon--google" href="{{url}}" target="_blank">
+                        <svg><use xlink:href="#icon-google" /></svg>
+                    </a>
+				{{/if}}
+				
+                {{#if display_name '===' 'facebook'}}
+                    <a class="icon icon--facebook" href="{{url}}" target="_blank">
+                        <svg width="1em" height="1em" fill="currentColor" viewBox="0 0 40 40"><g fill="currentColor"><path d="M20.325 12.288v4.447h-3.307v5.437h3.307V38.33h6.793V22.173h4.558s.427-2.608.634-5.458h-5.167v-3.718c0-.556.74-1.303 1.473-1.303h3.7v-5.66h-5.031c-7.128-.001-6.96 5.442-6.96 6.254z"></path><path d="M31.46 0H8.577C3.965 0 .212 3.752.212 8.365v22.883c0 4.613 3.753 8.365 8.365 8.365H31.46c4.612 0 8.364-3.752 8.364-8.365V8.365C39.825 3.752 36.073 0 31.46 0zm6.35 31.248a6.358 6.358 0 0 1-6.35 6.35H8.577a6.358 6.358 0 0 1-6.35-6.35V8.365a6.358 6.358 0 0 1 6.35-6.35H31.46a6.358 6.358 0 0 1 6.35 6.35v22.883z"></path></g></svg>
+                    </a>
+				{{/if}}
+				
+				{{#if display_name '===' 'instagram'}}
+                    <a class="icon icon--instagram" href="{{url}}" target="_blank">
+                        <svg width="1em" height="1em" fill="currentColor" viewBox="0 0 40 40"><g fill="cureentColor"><path d="M31.248 0H8.365C3.752 0 0 3.752 0 8.365v22.883c0 4.613 3.752 8.365 8.365 8.365h22.883c4.613 0 8.365-3.752 8.365-8.365V8.365C39.613 3.752 35.86 0 31.248 0zm6.35 31.248a6.358 6.358 0 0 1-6.35 6.35H8.365a6.358 6.358 0 0 1-6.35-6.35V8.365a6.358 6.358 0 0 1 6.35-6.35h22.883a6.358 6.358 0 0 1 6.35 6.35v22.883z"></path><path d="M19.806 9.662c-5.593 0-10.144 4.55-10.144 10.144s4.55 10.145 10.144 10.145 10.145-4.55 10.145-10.145c0-5.593-4.55-10.144-10.145-10.144zm0 18.27c-4.48 0-8.125-3.646-8.125-8.126 0-4.48 3.645-8.125 8.125-8.125s8.125 3.645 8.125 8.125-3.644 8.125-8.125 8.125z"></path><circle cx="31.245" cy="8.057" r="3.226"></circle></g></svg>
+                    </a>
+				{{/if}}
+				
+				{{#if display_name '===' 'youtube'}}
+                    <a class="icon icon--youtube" href="{{url}}" target="_blank">
+                        <svg width="1em" height="1em" fill="currentColor" viewBox="0 0 40 40"><g fill="currentColor" fill-rule="evenodd"><path d="M13.964 27.567V12.064l14.31 7.752z"></path><path d="M31.279.01H8.395C3.783.01.031 3.76.031 8.373v22.883c0 4.613 3.752 8.365 8.364 8.365H31.28c4.612 0 8.364-3.752 8.364-8.365V8.374c0-4.613-3.752-8.365-8.364-8.365zm6.35 31.247a6.358 6.358 0 0 1-6.35 6.35H8.395a6.358 6.358 0 0 1-6.35-6.35V8.374a6.358 6.358 0 0 1 6.35-6.35H31.28a6.358 6.358 0 0 1 6.35 6.35v22.883z" fill-rule="nonzero"></path></g></svg>
+                    </a>
+				{{/if}}
+				
+				{{#or (if display_name '===' 'facebook') (if display_name '===' 'instagram') (if display_name '===' 'youtube')}}
+				
+                {{else}}
+                    <a class="icon icon--{{display_name}}" href="{{url}}" target="_blank">
+                        <svg><use xlink:href="#icon-{{display_name}}" /></svg>
+                    </a>
+                {{/or}}
+            </li>
+        {{/each}}
+    </ul>
+{{/if}}

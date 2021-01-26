@@ -1,0 +1,384 @@
+<div class="productView productview" {{#if settings.data_tag_enabled}} data-event-type="product" data-entity-id="{{product.id}}" data-name="{{product.title}}" data-product-category="{{#each product.category}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}}" data-product-brand="{{product.brand.name}}" data-product-price="{{#if product.price.with_tax}}{{product.price.with_tax.value}}{{else}}{{product.price.without_tax.value}}{{/if}}" data-product-variant="single-product-option"{{/if}}>
+{{#each product.reviews.messages}}
+        {{#if error}}
+            {{> components/common/alert-error error}}
+        {{/if}}
+        {{#if success}}
+            {{> components/common/alert-success success}}
+        {{/if}}
+    {{/each}}
+	
+	<section class="productView-images" data-image-gallery>
+        <figure class="productView-image"
+                data-image-gallery-main
+                {{#if product.main_image}}
+                data-zoom-image="{{getImage product.main_image 'zoom_size' (cdn theme_settings.default_image_product)}}"
+                {{/if}}
+                >
+            <div class="productView-img-container">
+                {{!-- Remove the surrounding a-element if there is no main image. --}}
+                {{#if product.main_image}}
+                    <a href="{{getImage product.main_image 'zoom_size' (cdn theme_settings.default_image_product)}}">
+                {{/if}}
+
+                <img class="productView-image--default lazyload"
+                     data-sizes="auto"
+                     src="{{cdn 'img/loading.svg'}}"
+                     data-src="{{getImage product.main_image 'zoom_size' (cdn theme_settings.default_image_product)}}"
+                     alt="{{product.main_image.alt}}" title="{{product.main_image.alt}}" data-main-image>
+
+                {{#if product.main_image}}
+                    </a>
+                {{/if}}
+            </div>
+        </figure>
+        <ul class="productView-thumbnails"{{#gt product.images.length 5}} data-slick='{
+                "dots": false,
+                "arrows": true,
+                "infinite": false,
+                "mobileFirst": true,
+                "vertical": true,
+                "verticalSwiping": true,
+                "slidesToShow": 6,
+                "slidesToScroll": 1,
+                "responsive": [
+                    {
+                        "breakpoint": 1199,
+                        "settings": {
+                            "slidesToShow": 5
+                        }
+                    },
+                    {
+                        "breakpoint": 900,
+                        "settings": {
+                            "slidesToShow": 4
+                        }
+                    },
+                    {
+                        "breakpoint": 799,
+                        "settings": {
+                            "slidesToShow": 3
+                        }
+                    },
+                    {
+                        "breakpoint": 767,
+                        "settings": {
+                            "dots": false,
+                            "arrows": true,
+                            "vertical": true,
+                            "verticalSwiping": true,
+                            "slidesToShow": 6
+                        }
+                    },
+                    {
+                        "breakpoint": 620,
+                        "settings": {
+                            "dots": true,
+                            "arrows": false,
+                            "vertical": false,
+                            "verticalSwiping": false,
+                            "slidesToShow": 5
+                        }
+                    },
+                    {
+                        "breakpoint": 520,
+                        "settings": {
+                            "dots": true,
+                            "arrows": false,
+                            "vertical": false,
+                            "verticalSwiping": false,
+                            "slidesToShow": 4
+                        }
+                    },
+                    {
+                        "breakpoint": 319,
+                        "settings": {
+                            "dots": true,
+                            "arrows": false,
+                            "vertical": false,
+                            "verticalSwiping": false,
+                            "slidesToShow": 3
+                        }
+                    }
+                ]
+            }'{{/gt}}>
+            {{#each product.images}}
+                <li class="productView-thumbnail">
+                    <a
+                        class="productView-thumbnail-link"
+                        href="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}"
+                        data-image-gallery-item
+                        data-image-gallery-new-image-url="{{getImage this 'product_size' (cdn ../theme_settings.default_image_product)}}"
+                        data-image-gallery-zoom-image-url="{{getImage this 'zoom_size' (cdn ../theme_settings.default_image_product)}}">
+                        <img class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage this 'productview_thumb_size' (cdn ../theme_settings.default_image_product)}}" alt="{{this.alt}}" title="{{this.alt}}">
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
+    </section>
+
+    <section class="productView-details">
+        <div class="productView-product">
+			<div class="title_price_main">
+				<div class="title_review">
+					<h1 class="productView-title" {{#if schema}}itemprop="name"{{/if}}>{{product.title}}</h1>
+					{{#if product.brand}}
+						<h2 class="productView-brand"{{#if schema}} itemprop="brand" itemscope itemtype="http://schema.org/Brand"{{/if}}>
+							<a href="{{product.brand.url}}"{{#if schema}} itemprop="url"{{/if}}><span{{#if schema}} itemprop="name"{{/if}}>{{product.brand.name}}</span></a>
+						</h2>
+					{{/if}}
+					<div class="productView-rating"{{#if product.num_reviews '>' 0}}{{#if schema}} itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"{{/if}}{{/if}}>
+						{{#if settings.show_product_rating}}
+							{{#if product.num_reviews '>' 0}}
+								{{#if schema}}
+									<meta itemprop="ratingValue" content="{{product.rating}}">
+									<meta itemprop="ratingCount" content="{{product.num_reviews}}">
+									<meta itemprop="reviewCount" content="{{product.num_reviews}}">
+								{{/if}}
+							{{/if}}
+							{{> components/products/ratings rating=product.rating}}
+							<span class="productView-reviewLink">
+								{{#if product.num_reviews '>' 0}}
+									<a href="{{product.url}}#product-reviews">
+										{{lang 'products.reviews.link_to_review' total=product.num_reviews}}
+									</a>
+								{{else}}
+									{{lang 'products.reviews.link_to_review' total=product.num_reviews}}
+								{{/if}}
+							</span>
+						{{/if}}
+						{{#if settings.show_product_reviews}}
+							<span class="productView-reviewLink">
+								<a href="{{product.url}}{{#if is_ajax}}#write_review{{/if}}"
+								   {{#unless is_ajax }}data-reveal-id="modal-review-form"{{/unless}}>
+								   {{lang 'products.reviews.new'}}
+								</a>
+							</span>
+							{{> components/products/modals/writeReview}}
+						{{/if}}
+					</div>
+				</div>
+				<div class="priceleft">
+					{{#if product.call_for_price}}
+						<p class="productView-price">
+							<span>{{product.call_for_price}}</span>
+						</p>
+					{{/if}}
+					<div class="productView-price">
+						{{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+							{{> components/products/price price=product.price schema_org=schema}}
+						{{else}}
+							{{> components/common/login-for-pricing}}
+						{{/or}}
+					</div>
+					{{{region name="product_below_price"}}}
+				</div>
+			</div>
+            {{product.detail_messages}}
+            <dl class="productView-info">
+                <dt class="productView-info-name sku-label"{{#unless product.sku}} style="display: none;"{{/unless}}>{{lang 'products.sku'}}</dt>
+                <dd class="productView-info-value" data-product-sku>{{product.sku}}</dd>
+                <dt class="productView-info-name upc-label"{{#unless product.upc}} style="display: none;"{{/unless}}>{{lang 'products.upc'}}</dt>
+                <dd class="productView-info-value" data-product-upc>{{product.upc}}</dd>
+                {{#if product.condition}}
+                    <dt class="productView-info-name">{{lang 'products.condition'}}</dt>
+                    <dd class="productView-info-value">{{product.condition}}</dd>
+                {{/if}}
+                {{#if product.availability}}
+                    <dt class="productView-info-name">{{lang 'products.availability'}}</dt>
+                    <dd class="productView-info-value">{{product.availability}}</dd>
+                {{/if}}
+                {{#all product.weight theme_settings.show_product_weight}}
+                    <dt class="productView-info-name">{{lang 'products.weight'}}</dt>
+                    <dd class="productView-info-value" data-product-weight>{{product.weight}}</dd>
+                {{/all}}
+                {{#all product.width product.height product.depth theme_settings.show_product_dimensions}}
+                    <dt class="productView-info-name">{{lang 'products.width'}}</dt>
+                    <dd class="productView-info-value" data-product-width>
+                        {{product.width}}
+                        {{#if settings.measurements.length '==' 'Centimeters'}}
+                        ({{lang 'products.measurement.metric'}})
+                        {{else}}
+                        ({{lang 'products.measurement.imperial'}})
+                        {{/if}}
+                    </dd>
+                    <dt class="productView-info-name">{{lang 'products.height'}}</dt>
+                    <dd class="productView-info-value" data-product-height>
+                        {{product.height}}
+                        {{#if settings.measurements.length '==' 'Centimeters'}} 
+                        ({{lang 'products.measurement.metric'}})
+                        {{else}}
+                        ({{lang 'products.measurement.imperial'}})
+                        {{/if}}
+                    </dd>
+                    <dt class="productView-info-name">{{lang 'products.depth'}}</dt>
+                    <dd class="productView-info-value" data-product-depth>
+                        {{product.depth}}
+                        {{#if settings.measurements.length '==' 'Centimeters'}}
+                        ({{lang 'products.measurement.metric'}})
+                        {{else}}
+                        ({{lang 'products.measurement.imperial'}})
+                        {{/if}}
+                    </dd>
+                {{/all}}
+                {{#if product.min_purchase_quantity}}
+                    <dt class="productView-info-name">{{lang 'products.min_purchase_quantity'}}</dt>
+                    <dd class="productView-info-value">{{lang 'products.purchase_units' quantity=product.min_purchase_quantity}}</dd>
+                {{/if}}
+                {{#if product.max_purchase_quantity}}
+                    <dt class="productView-info-name">{{lang 'products.max_purchase_quantity'}}</dt>
+                    <dd class="productView-info-value">{{lang 'products.purchase_units' quantity=product.max_purchase_quantity}}</dd>
+                {{/if}}
+                {{#if product.gift_wrapping_available}}
+                    <dt class="productView-info-name">{{lang 'products.gift_wrapping'}}</dt>
+                    <dd class="productView-info-value">{{lang 'products.gift_wrapping_available'}}</dd>
+                {{/if}}
+                {{#if product.shipping}}
+                    {{#if product.shipping.calculated}}
+                        <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
+                        <dd class="productView-info-value">{{lang 'products.shipping_calculated'}}</dd>
+                    {{else}}
+                        {{#if product.shipping.price.value '===' 0}}
+                            <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
+                            <dd class="productView-info-value">{{lang 'products.shipping_free'}}</dd>
+                        {{else}}
+                            <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
+                            <dd class="productView-info-value">{{lang 'products.shipping_fixed' amount=product.shipping.price.formatted}}</dd>
+                        {{/if}}
+                    {{/if}}
+                {{/if}}
+
+                {{#if settings.bulk_discount_enabled}}
+                    <div class="productView-info-bulkPricing">
+                        {{> components/products/bulk-discount-rates bulk_discount_rates=product.bulk_discount_rates}}
+                    </div>
+                {{/if}}
+
+               {{!-- {{#if theme_settings.show_custom_fields_tabs '!==' true}}
+                    {{#each product.custom_fields}}
+                        <dt class="productView-info-name">{{name}}:</dt>
+                        <dd class="productView-info-value">{{{value}}}</dd>
+                    {{/each}}
+                {{/if}} --}}
+            </dl>
+        </div>
+    </section>
+
+    <section class="productView-details">
+        <div class="productView-options">
+            {{#if product.release_date }}
+                <p>{{product.release_date}}</p>
+            {{/if}}
+            <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
+                  data-cart-item-add>
+                <input type="hidden" name="action" value="add">
+                <input type="hidden" name="product_id" value="{{product.id}}"/>
+                <div data-product-option-change style="display:none;">
+                    {{#each product.options}}
+                        {{{dynamicComponent 'components/products/options'}}}
+                    {{/each}}
+                </div>
+                {{#if product.can_purchase}}
+                    {{> components/products/add-to-cart}}
+                {{/if}}
+                {{#if product.out_of_stock}}
+                    {{#if product.out_of_stock_message}}
+                        {{> components/common/alert-error product.out_of_stock_message}}
+                    {{else}}
+                        {{> components/common/alert-error (lang 'products.sold_out')}}
+                    {{/if}}
+                {{/if}}
+                {{!--
+				<div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+                    <label class="form-label form-label--alternate">
+                        {{lang 'products.current_stock'}}
+                        <span data-product-stock>{{product.stock_level}}</span>
+                       <!-- <svg class="svgTrue" width="14px" height="14px" fill="currentColor" viewBox="0 0 18 18"><path stroke="#36BAE0" stroke-width="3" d="M2.5 9.112l4.956 4.779L15.5 4.109" fill="none" stroke-linecap="square"></path></svg>
+                        <svg style="display:none;"  class="svgFalse" width="14px" height="14px" fill="currentColor" viewBox="0 0 20 20"><g fill="none" fill-rule="evenodd"><path d="M-4.5-4.5h29v29h-29z"></path><path d="M3.848 3.848l12.304 12.304m0-12.304L3.848 16.152" stroke="#F34639" stroke-linecap="square" stroke-width="1.5"></path></g></svg> -->
+                    </label>
+                </div>
+                --}} 
+            </form>
+            {{#if settings.show_wishlist}}
+                {{> components/common/wishlist-dropdown}}
+            {{/if}}
+        </div>
+        {{> components/common/share}}
+    </section>
+    
+    <div class="sg_usp_container">
+        <div class="sg_usp_bg">
+            <div class="hr hs">
+                <a class="bi bc" href="https://www.polarnopyret.se/">
+                    <span class="ht">
+                        <span class="b7 b8 b9 ba bb">
+                            <svg width="1em" height="1em" fill="currentColor" viewBox="0 0 90 90">
+                                <g transform="translate(3 18)" id="Fri-frakt" fill="none" fill-rule="evenodd">
+                                    <path d="M54.441 46.36V13.548h10.937c3.828 0 6.198 2.37 9.661 6.38 3.464 3.828 6.015 7.29 7.11 9.114 1.457 2.37 1.093 4.556 1.093 8.385 0 4.92.547 8.931-1.094 8.931h-3.645c-.73-4.192-3.646-8.203-9.297-8.203-5.104 0-8.385 4.011-9.115 8.203h-5.65zm-.39-44.86v44.86H25.443c-.864-6.36-4.623-8.428-8.808-8.526-4.107-.096-8.05 2.216-9.138 8.525H1.9V1.5h52.15zM22.013 46.36c.065.35.11.706.11 1.075 0 3.276-2.68 5.954-5.956 5.954-3.275 0-5.955-2.678-5.955-5.955 0-.367.045-.723.11-1.075.51-2.766 2.938-4.88 5.845-4.88 2.908 0 5.335 2.114 5.846 4.88zm52.85 0c.065.35.109.706.109 1.075 0 3.276-2.68 5.954-5.955 5.954s-5.955-2.678-5.955-5.955c0-.367.045-.723.11-1.075.51-2.766 2.938-4.88 5.845-4.88 2.908 0 5.335 2.114 5.846 4.88z" id="Combined-Shape" fill="#FFF"></path>
+                                    <path d="M54.65 12.549h10.328c3.77 0 6.025 1.64 10.403 6.709 3.145 3.475 5.9 7.062 7.219 9.26.164.267.31.535.438.806.784 1.655.888 2.814.824 6.338-.014.783-.02 1.236-.02 1.766 0 .82.013 1.545.044 2.793.067 2.723.067 3.557-.05 4.532-.195 1.608-.786 2.606-2.088 2.606h-4.486l-.144-.828c-.767-4.407-3.734-7.374-8.312-7.374-4.186 0-7.396 3.162-8.13 7.374l-.144.828H24.17l-.117-.865c-.712-5.238-3.464-7.558-7.84-7.66-4.171-.098-7.222 2.43-8.13 7.695l-.143.83H.499V.5h54.152v12.05zm0 2v30.81h4.23c1.156-4.7 4.981-8.203 9.926-8.203 5.332 0 8.959 3.345 10.112 8.203h2.732c.078-.153.15-.438.2-.846.1-.834.1-1.646.036-4.242a108.06 108.06 0 0 1-.044-2.843c0-.545.006-1.008.02-1.803.059-3.207-.028-4.17-.631-5.445a6.475 6.475 0 0 0-.34-.623c-1.252-2.086-3.93-5.572-7.009-8.975-4.033-4.671-5.907-6.034-8.904-6.034H54.651zm-2-12.049H2.5v42.86h3.775c1.269-5.696 5.053-8.64 9.983-8.526 5.083.12 8.584 2.873 9.637 8.525H52.65V2.5zM20.494 46.64c-.383-2.076-2.206-3.617-4.326-3.617-2.119 0-3.942 1.542-4.325 3.612a4.44 4.44 0 0 0-.085.798c0 2.421 1.99 4.41 4.41 4.41 2.422 0 4.41-1.988 4.41-4.41a4.34 4.34 0 0 0-.084-.793zm1.967-.364c.07.378.117.761.117 1.157 0 3.526-2.883 6.41-6.41 6.41-3.525 0-6.41-2.884-6.41-6.41 0-.396.049-.78.118-1.157.55-2.977 3.163-5.253 6.292-5.253 3.13 0 5.743 2.276 6.293 5.253zm50.881.366c-.383-2.075-2.206-3.616-4.324-3.616-2.119 0-3.942 1.54-4.324 3.616a4.342 4.342 0 0 0-.085.792c0 2.421 1.988 4.41 4.409 4.41 2.42 0 4.408-1.989 4.408-4.41a4.31 4.31 0 0 0-.084-.792zm1.967-.364c.07.377.117.76.117 1.157 0 3.525-2.883 6.408-6.408 6.408-3.525 0-6.409-2.883-6.409-6.409 0-.396.048-.779.118-1.156.55-2.977 3.162-5.252 6.29-5.252 3.13 0 5.742 2.275 6.292 5.252z" id="Combined-Shape" fill="#010101" fill-rule="nonzero"></path>
+                                </g>
+                            </svg>
+                        </span>
+                    </span>
+                    <label class="du ah cf c6 c7 hu en dp">Free shipping over 100€</label>
+                </a>
+            </div>
+            <div class="hr hs">
+                <a class="bi bc" href="https://www.polarnopyret.se/">
+                    <span class="ht">
+                        <span class="b7 b8 b9 ba bb">
+                            <svg width="1em" height="1em" fill="currentColor" viewBox="0 0 90 90">
+                                <g transform="translate(6.5 15.5)" id="Leveranstid" fill="none" fill-rule="evenodd">
+                                    <path id="Fill-1" fill="#FFF" d="M1.5 11.219v33.979l40.752 12.524L74.79 43.64l.295-32.966L38.59 1.516z"></path>
+                                    <path d="M41.265 56.372l.313-34.366L2.5 12.492v31.967l38.765 11.913zm2.002-.179L73.795 42.98l.278-30.926-9.03 2.93v5.97l-11.878 4.494-.16-6.557-9.426 3.06-.312 34.242zM5.584 11.184l36.962 9 8.724-2.832L16.154 8.42l-10.57 2.765zm65.883-.387L38.596 2.548l-9.25 2.42 33.288 8.696 8.833-2.867zM38.585.484l37.508 9.412-.31 34.402-33.472 14.488-41.81-12.85V10.448L38.585.484z" id="Combined-Shape" fill="#000" fill-rule="nonzero"></path>
+                                </g>
+                            </svg>
+                        </span>
+                    </span>
+                    <label class="du ah cf c6 c7 hu en dp">Delivery time: 2-5 business days</label>
+                </a>
+            </div>
+            <div class="hr hs">
+                <a class="bi bc" href="https://www.polarnopyret.se/">
+                    <span class="ht">
+                        <span class="b7 b8 b9 ba bb">
+                            <svg width="1em" height="1em" fill="currentColor" viewBox="0 0 90 90">
+                                <g transform="translate(13 14)" id="Öppet-köp" fill="none">
+                                    <path id="Rectangle" fill="#FFF" d="M1 9h62v52H1z"></path>
+                                    <path d="M2 20.5h60V10H2v10.5zm0 2V60h60V22.5H2zM0 8h64v54H0V8zm24.212 42.076h-2.22v-17.91h-3.33l1.17-2.1h4.38v20.01zm22.35-3.27h-2.46v3.27h-2.22v-3.27h-10.26l12.48-17.85v15.81h2.46v2.04zm-4.68-2.04v-9.03l-6.33 9.03h6.33z" id="Combined-Shape" fill="#000"></path>
+                                    <g id="Top" transform="translate(12)">
+                                        <rect id="Rectangle" fill="#FFF" x="2" y="2" width="5" height="12" rx="2.5"></rect>
+                                        <rect id="Rectangle-Copy-20" fill="#FFF" x="33.086" y="2" width="5" height="12" rx="2.5"></rect>
+                                        <path d="M35.558 2.5a2 2 0 0 0-2 2v7a2 2 0 1 0 4 0v-7a2 2 0 0 0-2-2zm0-2a4 4 0 0 1 4 4v7a4 4 0 1 1-8 0v-7a4 4 0 0 1 4-4z" id="Rectangle-Copy-25" fill="#000"></path>
+                                        <path d="M4.528 2.5a2 2 0 0 0-2 2v7a2 2 0 1 0 4 0v-7a2 2 0 0 0-2-2zm0-2a4 4 0 0 1 4 4v7a4 4 0 1 1-8 0v-7a4 4 0 0 1 4-4z" id="Rectangle-Copy-26" fill="#000"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </span>
+                    </span>
+                    <label class="du ah cf c6 c7 hu en dp">14 days free returns </label>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="productviewBottom">
+<article class="productView-description"{{#if schema}} itemprop="description"{{/if}}>
+    {{#if theme_settings.show_product_details_tabs}}
+        {{> components/products/description-tabs}}
+    {{else}}
+        {{> components/products/description}}
+    {{/if}}
+</article>
+{{#all settings.show_product_reviews (if theme_settings.show_product_reviews_tabs '!==' true)}}
+    {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
+{{/all}}
+</div>
+
+<div id="previewModal" class="modal modal--large" data-reveal>
+    <a href="#" class="modal-close" aria-label="{{lang 'common.close'}}" role="button">
+        <span aria-hidden="true">&#215;</span>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>

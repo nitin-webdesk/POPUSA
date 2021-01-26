@@ -1,0 +1,93 @@
+---
+product:
+    videos:
+        limit: {{theme_settings.productpage_videos_count}}
+    reviews:
+        limit: {{theme_settings.productpage_reviews_count}}
+    related_products:
+        limit: {{theme_settings.productpage_related_products_count}}
+    similar_by_views:
+        limit: {{theme_settings.productpage_similar_by_views_count}}
+---
+{{#partial "page"}}
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+    {{#each product.shipping_messages}}
+        {{> components/common/alert-info message}}
+    {{/each}}
+
+    <div class="PP_custom_blog" itemscope itemtype="http://schema.org/Product">
+        {{> components/products/product-view schema=true}}
+
+        {{{region name="product_below_content"}}}
+
+        {{#if product.videos.list.length}}
+            {{> components/products/videos product.videos}}
+        {{/if}}
+		
+		
+		<!-- Blog Section Start -->
+		<div class="blog_section_main">
+			<ul>
+				<li>
+					<div>
+						<a href="/blog/about-our-shell-jacket/">
+							<img src="/content/skal_1200x900.jpg" alt="" />
+							<div class="blog_cont">
+								<h2>About our shell jacket</h2>
+								<p>Our shell jacket is both windproof and waterproof, and has a storm flap for extra protection against cold air and rain.</p>
+								<a href="/blog/about-our-shell-jacket/" class="rm_btn">Read More</a>
+							</div>
+						</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="/blog/about-our-wind-fleece/">
+							<img src="/content/vindfleece_1200x900.jpg" alt="" />
+							<div class="blog_cont">
+								<h2>About our wind fleece</h2>
+								<p>Our wind fleece jacket can be used as a cosy middle layer or a jacket for milder days.</p>
+								<a href="/blog/about-our-wind-fleece/" class="rm_btn">Read More</a>
+							</div>
+						</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="/blog/the-layering-principle/">
+							<img src="/content/lagerpalager_1200x900.jpg" alt="" />
+							<div class="blog_cont">
+								<h2>The layering principle</h2>
+								<p>How to dress smart with layers? The layering principle is a brilliant way to weatherproof your child!</p>
+								<a href="/blog/the-layering-principle/" class="rm_btn">Read More</a>
+							</div>
+						</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- Blog Section End -->
+        
+        {{#if product.related_products}}
+            <div class="pp_bottom_products related_products">
+                <h2>Others also looked at</h2>
+             {{> components/products/grid products=product.related_products}}
+            </div>
+        {{/if}}
+
+        {{#if product.similar_by_views}}
+            <div class="pp_bottom_products customer_also_viewed">
+                <h2>Others also looked at</h2>
+             {{> components/products/grid products=product.similar_by_views}}
+            </div>
+        {{/if}}
+    </div>
+    <style>
+        .body {
+    margin-bottom: 0;
+}
+    </style>
+{{/partial}}
+{{> layout/base}}
+

@@ -1,0 +1,810 @@
+<p class="productView-title">Information</p>
+<div class="productView-description" {{#if settings.data_tag_enabled}} data-event-type="product" {{/if}}>
+    {{{first (split product.description '<!-- split -->')}}}
+</div>
+
+<div class="description_accordion">
+	<!--<div class="productView-title accordion" id="section1">Questions and answers<span></span></div>
+	<div class="container">
+		<div class="productView-description content">
+			<p>Coming Soon..</p>
+		</div>
+	</div>-->
+
+	{{#if product.warranty}}
+	<div class="productView-title accordion" id="section2">Size guide<span></span></div>
+	<div class="container">
+		<div class="productView-description content">
+			<ul id="FAQlist">
+				<li class="FAQ">
+					<b>BABY AND KIDS ► </b>
+					<div id="faq1" class="FAA" style="display: none;">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<th scope="col">
+										<p>Age<br>(approx.)</p>
+									</th>
+									<th scope="col">
+										<p>PO.P Size <br>CM</p>
+									</th>
+									<th scope="col">
+										<p>Height <br>INCHES</p>
+									</th>
+									<th scope="col">
+										<p>Weight <br>LBS</p>
+									</th>
+									<th scope="col">
+										<p>Chest<br>INCHES</p>
+									</th>
+									<th scope="col">
+										<p>Waist<br>INCHES</p>
+									</th>
+									<th scope="col">
+										<p>Inseam<br>INCHES</p>
+									</th>
+								</tr>
+								<tr>
+									<th scope="row">PREEMIE</th>
+									<td>40</td>
+									<td>16</td>
+									<td>Up to 4.5</td>
+								</tr>
+								<tr>
+									<th scope="row">0 - 1 months</th>
+									<td>50</td>
+									<td>20</td>
+									<td>6-10</td>
+									<td>16</td>
+									<td>16</td>
+									<td>6</td>
+								</tr>
+								<tr>
+									<th scope="row">1 - 2 months</th>
+									<td>56</td>
+									<td>22</td>
+									<td>7-11</td>
+									<td>17</td>
+									<td>17</td>
+									<td>7</td>
+								</tr>
+								<tr>
+									<th scope="row">2 - 4 months</th>
+									<td>62</td>
+									<td>24.5</td>
+									<td>9-15</td>
+									<td>18</td>
+									<td>18</td>
+									<td>8</td>
+								</tr>
+								<tr>
+									<th scope="row">4 - 6 months</th>
+									<td>68</td>
+									<td>27</td>
+									<td>12-17</td>
+									<td>18.5</td>
+									<td>18.5</td>
+									<td>9</td>
+								</tr>
+								<tr>
+									<th scope="row">6 - 9 months</th>
+									<td>74</td>
+									<td>29</td>
+									<td>14-21</td>
+									<td>19</td>
+									<td>19</td>
+									<td>10.5</td>
+								</tr>
+								<tr>
+									<th scope="row">9 - 12 months</th>
+									<td>80</td>
+									<td>31.5</td>
+									<td>16-23</td>
+									<td>20</td>
+									<td>19</td>
+									<td>11.5</td>
+								</tr>
+								<tr>
+									<th scope="row">1 - 1.5 yrs</th>
+									<td>86</td>
+									<td>34</td>
+									<td>19-25</td>
+									<td>20</td>
+									<td>20</td>
+									<td>13</td>
+								</tr>
+								<tr>
+									<th scope="row">1.5 - 2 yrs</th>
+									<td>92</td>
+									<td>36</td>
+									<td>21-29</td>
+									<td>21</td>
+									<td>21</td>
+									<td>14.5</td>
+								</tr>
+								<tr>
+									<th scope="row">2 - 3 yrs</th>
+									<td>98</td>
+									<td>38.5</td>
+									<td>23-28</td>
+									<td>21</td>
+									<td>20.5</td>
+									<td>16</td>
+								</tr>
+								<tr>
+									<th scope="row">3 - 4 yrs</th>
+									<td>104</td>
+									<td>41</td>
+									<td>28-42</td>
+									<td>22</td>
+									<td>21</td>
+									<td>17</td>
+								</tr>
+								<tr>
+									<th scope="row">4 - 5 yrs</th>
+									<td>110</td>
+									<td>43</td>
+									<td>33-48</td>
+									<td>22.5</td>
+									<td>21</td>
+									<td>19</td>
+								</tr>
+								<tr>
+									<th scope="row">5 - 6 yrs</th>
+									<td>116</td>
+									<td>46</td>
+									<td>37-54</td>
+									<td>23</td>
+									<td>21.5</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<th scope="row">6 - 7 yrs</th>
+									<td>122</td>
+									<td>48</td>
+									<td>42-59</td>
+									<td>24</td>
+									<td>22</td>
+									<td>21.5</td>
+								</tr>
+								<tr>
+									<th scope="row">7 - 8 yrs</th>
+									<td>128</td>
+									<td>50</td>
+									<td>46-67</td>
+									<td>25</td>
+									<td>23</td>
+									<td>23</td>
+								</tr>
+								<tr>
+									<th scope="row">8 - 9 yrs</th>
+									<td>134</td>
+									<td>53</td>
+									<td>51-71</td>
+									<td>26</td>
+									<td>23.5</td>
+									<td>24.5</td>
+								</tr>
+								<tr>
+									<th scope="row">9 - 10 yrs</th>
+									<td>140</td>
+									<td>55</td>
+									<td>57-87</td>
+									<td>27.5</td>
+									<td>24</td>
+									<td>26</td>
+								</tr>
+								<tr>
+									<th scope="row">10 - 11 yrs</th>
+									<td>146</td>
+									<td>57.5</td>
+									<td>64-93</td>
+									<td>29</td>
+									<td>25</td>
+									<td>27</td>
+								</tr>
+								<tr>
+									<th scope="row">11 - 12 yrs</th>
+									<td>152</td>
+									<td>60</td>
+									<td>72-100</td>
+									<td>30</td>
+									<td>25.5</td>
+									<td>28</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<hr>
+				</li>
+				<li class="FAQ">
+					<b> HATS ►</b>
+					<div id="faq2" class="FAA" style="display: none;">
+						<table style="width: 100%; font-size:16px;" border="0" cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<th scope="col">
+										<p>Age<br>(approx.)</p>
+									</th>
+									<th scope="col">
+										<p>Head Circumference <br>INCHES</p>
+									</th>
+									<th scope="col">
+										<p>Head Circumference <br>CM</p>
+									</th>
+								</tr>
+								<tr>
+									<th scope="row">0 - 1 months</th>
+									<td>15</td>
+									<td>38</td>
+								</tr>
+								<tr>
+									<th scope="row">1 - 2 months </th>
+									<td>16</td>
+									<td>40</td>
+								</tr>
+								<tr>
+									<th scope="row">2 - 4 months</th>
+									<td>16.5</td>
+									<td>42</td>
+								</tr>
+								<tr>
+									<th scope="row">4 - 6 months</th>
+									<td>17</td>
+									<td>44</td>
+								</tr>
+								<tr>
+									<th scope="row">6 - 9 months</th>
+									<td>18</td>
+									<td>46</td>
+								</tr>
+								<tr>
+									<th scope="row">9 - 12 months</th>
+									<td>19</td>
+									<td>48</td>
+								</tr>
+								<tr>
+									<th scope="row">1 - 1.5 yrs</th>
+									<td>19</td>
+									<td>49</td>
+								</tr>
+								<tr>
+									<th scope="row">1.5 - 2 yrs</th>
+									<td>20</td>
+									<td>50</td>
+								</tr>
+								<tr>
+									<th scope="row">2 -3 yrs</th>
+									<td>20</td>
+									<td>50</td>
+								</tr>
+								<tr>
+									<th scope="row">3 - 4 yrs</th>
+									<td>21</td>
+									<td>52</td>
+								</tr>
+								<tr>
+									<th scope="row">4 - 5 yrs</th>
+									<td>21</td>
+									<td>52</td>
+								</tr>
+								<tr>
+									<th scope="row">5 - 6 yrs</th>
+									<td>21</td>
+									<td>52</td>
+								</tr>
+								<tr>
+									<th scope="row">6 - 7 yrs</th>
+									<td>21.5</td>
+									<td>54</td>
+								</tr>
+								<tr>
+									<th scope="row">7 - 8 yrs</th>
+									<td>21.5</td>
+									<td>54</td>
+								</tr>
+								<tr>
+									<th scope="row">8 - 9 yrs</th>
+									<td>21.5</td>
+									<td>54</td>
+								</tr>
+								<tr>
+									<th scope="row">9 - 10 yrs</th>
+									<td>22</td>
+									<td>56</td>
+								</tr>
+								<tr>
+									<th scope="row">10 - 11 yrs</th>
+									<td>22</td>
+									<td>56</td>
+								</tr>
+								<tr>
+									<th scope="row">11 - 12 yrs</th>
+									<td>23</td>
+									<td>58</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<hr>
+				</li>
+				<li class="FAQ">
+					<b>GLOVES &amp; MITTENS ► </b>
+					<div id="faq3" class="FAA" style="display: none;">
+						<table style="width: 100%; font-size:16px;" border="0" cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<th scope="col">
+										<p>Age<br>(approx.)</p>
+									</th>
+									<th scope="col">
+										<p>PO.P Size <br>EURO</p>
+									</th>
+								</tr>
+								<tr>
+									<th scope="row">PREEMIE</th>
+									<td>0</td>
+								</tr>
+								<tr>
+									<th scope="row">0 - 1 months</th>
+									<td>0</td>
+								</tr>
+								<tr>
+									<th scope="row">1 - 2 months</th>
+									<td>0</td>
+								</tr>
+								<tr>
+									<th scope="row">2 - 4 months</th>
+									<td>0</td>
+								</tr>
+								<tr>
+									<th scope="row">4 - 6 months</th>
+									<td>0</td>
+								</tr>
+								<tr>
+									<th scope="row">6 - 9 months</th>
+									<td>1</td>
+								</tr>
+								<tr>
+									<th scope="row">9 - 12 months</th>
+									<td>1</td>
+								</tr>
+								<tr>
+									<th scope="row">1 - 1.5 yrs</th>
+									<td>2</td>
+								</tr>
+								<tr>
+									<th scope="row">1.5 - 2 yrs</th>
+									<td>2</td>
+								</tr>
+								<tr>
+									<th scope="row">2 - 3 yrs</th>
+									<td>3</td>
+								</tr>
+								<tr>
+									<th scope="row">3 - 4 yrs</th>
+									<td>3</td>
+								</tr>
+								<tr>
+									<th scope="row">4 - 5 yrs</th>
+									<td>4</td>
+								</tr>
+								<tr>
+									<th scope="row">5 - 6 yrs</th>
+									<td>4</td>
+								</tr>
+								<tr>
+									<th scope="row">6 - 7 yrs</th>
+									<td>5</td>
+								</tr>
+								<tr>
+									<th scope="row">7 - 8 yrs</th>
+									<td>5</td>
+								</tr>
+								<tr>
+									<th scope="row">8 - 9 yrs</th>
+									<td>5</td>
+								</tr>
+								<tr>
+									<th scope="row">9 - 10 yrs</th>
+									<td>6</td>
+								</tr>
+								<tr>
+									<th scope="row">10 - 11 yrs</th>
+									<td>6</td>
+								</tr>
+								<tr>
+									<th scope="row">11 - 12 yrs</th>
+									<td>6</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<hr>
+				</li>
+				<li class="FAQ">
+					<b>SOCKS ► </b>
+					<div id="faq4" class="FAA" style="display: none;">
+						<table style="width: 100%; font-size:16px;" border="0" cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<th scope="col">
+										<p>Age<br>(approx.)</p>
+									</th>
+									<th scope="col">
+										<p>PO.P Size <br>EURO</p>
+									</th>
+								</tr>
+								<tr>
+									<th scope="row">PREEMIE</th>
+									<td>10/12</td>
+								</tr>
+								<tr>
+									<th scope="row">0 - 1 months</th>
+									<td>10/12</td>
+								</tr>
+								<tr>
+									<th scope="row">1 - 2 months</th>
+									<td>13/15</td>
+								</tr>
+								<tr>
+									<th scope="row">2 - 4 months</th>
+									<td>13/15</td>
+								</tr>
+								<tr>
+									<th scope="row">4 - 6 months</th>
+									<td>16/18</td>
+								</tr>
+								<tr>
+									<th scope="row">6 - 9 months</th>
+									<td>16/18</td>
+								</tr>
+								<tr>
+									<th scope="row">9 - 12 months</th>
+									<td>19/21</td>
+								</tr>
+								<tr>
+									<th scope="row">1 - 1.5 yrs</th>
+									<td>22/24</td>
+								</tr>
+								<tr>
+									<th scope="row">1.5 - 2 yrs</th>
+									<td>22/24</td>
+								</tr>
+								<tr>
+									<th scope="row">2 - 3 yrs</th>
+									<td>25/27</td>
+								</tr>
+								<tr>
+									<th scope="row">3 - 4 yrs</th>
+									<td>25/27</td>
+								</tr>
+								<tr>
+									<th scope="row">4 - 5 yrs</th>
+									<td>28/30</td>
+								</tr>
+								<tr>
+									<th scope="row">5 - 6 yrs</th>
+									<td>28/30</td>
+								</tr>
+								<tr>
+									<th scope="row">6 - 7 yrs</th>
+									<td>31/33</td>
+								</tr>
+								<tr>
+									<th scope="row">7 - 8 yrs</th>
+									<td>31/33</td>
+								</tr>
+								<tr>
+									<th scope="row">8 - 9 yrs</th>
+									<td>34/36</td>
+								</tr>
+								<tr>
+									<th scope="row">9 - 10 yrs</th>
+									<td>34/36</td>
+								</tr>
+								<tr>
+									<th scope="row">10 - 11 yrs</th>
+									<td>37/39</td>
+								</tr>
+								<tr>
+									<th scope="row">11 - 12 yrs</th>
+									<td>40/42</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<hr>
+				</li>
+				<li class="FAQ">
+					<b> BOOTS AND SHOES ► </b>
+					<div id="faq5" class="FAA" style="display: none;">
+						<table style="width: 100%; font-size:16px;" border="0" cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<th scope="col">
+										<p>Age<br>(approx.)</p>
+									</th>
+									<th scope="col">
+										<p>PO.P Size <br>EURO</p>
+									</th>
+									<th scope="col">
+										<p>US Size<br></p>
+									</th>
+									<th scope="col">
+										<p>Foot<br>INCHES</p>
+									</th>
+								</tr>
+								<tr>
+									<th scope="row">9 - 12 months</th>
+									<td>19</td>
+									<td>3.5 - 4</td>
+									<td>4.25</td>
+								</tr>
+								<tr>
+									<th scope="row"> </th>
+									<td>21</td>
+									<td>5.5</td>
+									<td>5</td>
+								</tr>
+								<tr>
+									<th scope="row">1 - 2 yrs</th>
+									<td>22</td>
+									<td>6 - 6.5</td>
+									<td>5.25</td>
+								</tr>
+								<tr>
+									<th scope="row"> </th>
+									<td>23</td>
+									<td>7 - 7.5</td>
+									<td>5.625</td>
+								</tr>
+								<tr>
+									<th scope="row"> </th>
+									<td>24</td>
+									<td>8</td>
+									<td>5.75</td>
+								</tr>
+								<tr>
+									<th scope="row">2 - 4 yrs</th>
+									<td>25</td>
+									<td>8.5 - 9</td>
+									<td>6.125</td>
+								</tr>
+								<tr>
+									<th scope="row"> </th>
+									<td>27</td>
+									<td>10 - 10.5</td>
+									<td>6.5</td>
+								</tr>
+								<tr>
+									<th scope="row">4 - 6 yrs</th>
+									<td>28</td>
+									<td>11</td>
+									<td>6.75</td>
+								</tr>
+								<tr>
+									<th scope="row"> </th>
+									<td>29</td>
+									<td>11.5</td>
+									<td>7</td>
+								</tr>
+								<tr>
+									<th scope="row"> </th>
+									<td>30</td>
+									<td>12 - 12.5</td>
+									<td>7.25</td>
+								</tr>
+								<tr>
+									<th scope="row">6 - 8 yrs</th>
+									<td>31</td>
+									<td>13 - 13.5</td>
+									<td>7.625</td>
+								</tr>
+								<tr>
+									<th scope="row">  </th>
+									<td>32</td>
+									<td>1</td>
+									<td>7.75</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<hr>
+				</li>
+				<li class="FAQ">
+					<b> ADULT ► </b>
+					<div id="faq6" class="FAA" style="display: none;">
+						<table style="width: 100%; font-size:16px;" border="0" cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<th scope="col">
+										<p>Single Size</p>
+									</th>
+									<th scope="col">
+										<p>Double Size</p>
+									</th>
+									<th scope="col">
+										<p>Chest<br>INCHES</p>
+									</th>
+									<th scope="col">
+										<p>Seat<br>INCHES</p>
+									</th>
+								</tr>
+								<tr>
+									<th scope="row">32</th>
+									<td>XS</td>
+									<td>31.5</td>
+									<td>36</td>
+								</tr>
+								<tr>
+									<th scope="row">34</th>
+									<td> </td>
+									<td>36</td>
+									<td>37</td>
+								</tr>
+								<tr>
+									<th scope="row">36</th>
+									<td>S</td>
+									<td>35</td>
+									<td>38</td>
+								</tr>
+								<tr>
+									<th scope="row">38</th>
+									<td> </td>
+									<td>36.5</td>
+									<td>39</td>
+								</tr>
+								<tr>
+									<th scope="row">40</th>
+									<td>M</td>
+									<td>38</td>
+									<td>40.5</td>
+								</tr>
+								<tr>
+									<th scope="row">42</th>
+									<td> </td>
+									<td>39</td>
+									<td>42</td>
+								</tr>
+								<tr>
+									<th scope="row">44</th>
+									<td>L</td>
+									<td>41</td>
+									<td>43</td>
+								</tr>
+								<tr>
+									<th scope="row">46</th>
+									<td> </td>
+									<td>42.5</td>
+									<td>44</td>
+								</tr>
+								<tr>
+									<th scope="row">48</th>
+									<td>XL</td>
+									<td>45.5</td>
+									<td>46.5</td>
+								</tr>
+								<tr>
+									<th scope="row">50</th>
+									<td> </td>
+									<td>44</td>
+									<td>45</td>
+								</tr>
+								<tr>
+									<th scope="row">52</th>
+									<td>XXL</td>
+									<td>47</td>
+									<td>47.5</td>
+								</tr>
+								<tr>
+									<th scope="row">54</th>
+									<td> </td>
+									<td>49</td>
+									<td>49</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<hr>
+				</li>
+			</ul>
+		</div>
+	</div>
+	{{/if}}
+	
+	<div class="productView-title accordion" id="section3">Wash and care<span></span></div>
+	<div class="container">
+		<div class="productView-description content">
+			<div class="washcareList">
+				<div>
+					<span>
+						<svg width="1em" height="1em" fill="currentColor" viewBox="0 0 42 35">
+							<g id="Desktop---Phase-1" fill="none" fill-rule="evenodd">
+								<g id="Ikoner/Wash" transform="translate(.333 -3.175)" stroke="#000" stroke-width="2">
+									<path id="Rectangle-17" d="M1.006 3.56l4.105 33H35.9l4.105-33"></path>
+									<path d="M2.496 12.613c2.157 0 3.381-3.629 5.84-3.629s3.478 3.629 6.068 3.629c2.59 0 3.561-3.629 6.048-3.629s3.5 3.629 6.29 3.629c2.789 0 3.468-3.629 5.97-3.629 2.5 0 3.388 3.629 5.884 3.629" id="Line-6" stroke-linecap="square"></path>
+								</g>
+							</g>
+						</svg>
+					</span>
+					<span class="duck_label">60°C machine wash hot</span>
+				</div>
+				<div>
+					<span>
+						<svg width="1em" height="1em" fill="currentColor" viewBox="0 0 41 40">
+							<g id="Desktop---Phase-1" fill="none" fill-rule="evenodd">
+								<g id="Ikoner/Do-not-bleach" transform="translate(.333 .23)" stroke="#000">
+									<g id="Ej_blekning" transform="translate(-.121 3.075)">
+										<path d="M20.121 1.927L1.926 31.04h36.391L20.121 1.927z" id="Rectangle-24" stroke-width="2"></path>
+									</g>
+									<g id="x" transform="translate(1 .575)" stroke-linecap="square" stroke-width="2">
+										<path d="M36.924 1.005L.96 37.624" id="Line-29"></path>
+										<path d="M.96 1.005l35.964 36.619" id="Line-29-Copy"></path>
+									</g>
+								</g>
+							</g>
+						</svg>
+					</span>
+					<span class="duck_label">Do not bleach</span>
+				</div>
+				<div>
+					<span>
+						<svg width="1em" height="1em" fill="currentColor" viewBox="0 0 39 40">
+							<g id="Desktop---Phase-1" fill="none" fill-rule="evenodd">
+								<g id="Ikoner/Do-not-tumble-dry" transform="translate(-.413 .158)" stroke="#000" stroke-width="2">
+									<g id="x" transform="translate(1 .575)" stroke-linecap="square">
+										<path d="M36.924 1.005L.96 37.624" id="Line-29"></path>
+										<path d="M.96 1.005l35.964 36.619" id="Line-29-Copy"></path>
+									</g>
+									<circle id="Oval-11" cx="20" cy="20" r="14.5"></circle>
+									<path id="Rectangle-21" d="M3.557 3.557h32.886v32.886H3.557z"></path>
+								</g>
+							</g>
+						</svg>
+					</span>
+					<span class="duck_label">Do not tumble dry</span>
+				</div>
+				<div>
+					<span>
+						<svg width="1em" height="1em" fill="currentColor" viewBox="0 0 35 28">
+							<g id="Desktop---Phase-1" fill="none" fill-rule="evenodd">
+								<g id="Ikoner/Iron-Medium-temp" transform="translate(.333 -3.246)">
+									<g id="Strykning" transform="translate(0 3.5)">
+										<path d="M1.415 26.402h31.778l-1.764-15.396h-9.723c-10.497 0-19.132 6.705-20.29 15.396z" id="Rectangle-19" stroke="#000" stroke-width="2"></path>
+										<circle id="Oval-11" fill="#000" cx="15.543" cy="18.704" r="2"></circle>
+										<circle id="Oval-11" fill="#000" cx="22.543" cy="18.704" r="2"></circle>
+										<path id="Line-7" stroke="#000" stroke-width="2" stroke-linecap="square" d="M10.314.997h20.003l2.76 24.27"></path>
+									</g>
+								</g>
+							</g>
+						</svg>
+					</span>
+					<span class="duck_label">Medium iron</span>
+				</div>
+				<div>
+					<span>
+						<svg width="1em" height="1em" fill="currentColor" viewBox="0 0 40 40">
+							<g id="Desktop---Phase-1" fill="none" fill-rule="evenodd">
+								<g id="Ikoner/Do-not-dry-clean" transform="translate(.333 .078)" stroke="#000" stroke-width="2">
+									<g id="x" transform="translate(1 .575)" stroke-linecap="square">
+										<path d="M36.924 1.005L.96 37.624" id="Line-29"></path>
+										<path d="M.96 1.005l35.964 36.619" id="Line-29-Copy"></path>
+									</g>
+									<circle id="Oval-11" cx="20" cy="20" r="17"></circle>
+								</g>
+							</g>
+						</svg>
+					</span>
+					<span class="duck_label">Do not dryclean</span>
+				</div>
+			</div>
+			<p>On the laundry label in our garments, you will find information on how to safeguard your garment in the best way</p>
+			<a class="Wc_btn" href="/laundry-guide/">Read more about washing and care</a>
+		</div>
+	</div>
+</div>
+
+<div class="productView-description-bottom">
+    {{{product.warranty}}} 
+</div>
